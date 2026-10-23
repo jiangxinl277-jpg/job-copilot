@@ -1,0 +1,7 @@
+python-docx>=1.1
+openpyxl>=3.1
+pillow>=10.0
+
+# optional: screenshot OCR on macOS (install into a venv)
+# pyobjc-framework-Vision
+# pyobjc-framework-Quartz

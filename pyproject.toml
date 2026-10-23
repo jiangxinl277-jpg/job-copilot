@@ -1,0 +1,16 @@
+[project]
+name = "job-copilot"
+version = "0.1.0"
+description = "JD intake -> requirement extraction -> evidence match -> one-page tailored resume -> layout gate -> ledger"
+requires-python = ">=3.10"
+dependencies = [
+  "python-docx>=1.1",
+  "openpyxl>=3.1",
+  "pillow>=10.0",
+]
+
+[project.scripts]
+job-copilot = "scripts.run_all:main"
+
+[tool.ruff]
+line-length = 100

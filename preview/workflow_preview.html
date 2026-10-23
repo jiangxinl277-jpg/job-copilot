@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Job Copilot · 工作流预览</title>
+<style>
+  :root{
+    --ink:#1b2330; --muted:#64707f; --line:#d8dee8; --navy:#1f3560;
+    --tint:#f4f7fb; --ok:#1f7a4d; --warn:#a86a00; --bad:#a33;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:#eef1f5;color:var(--ink);
+       font-family:"PingFang SC","Microsoft YaHei",Helvetica,sans-serif;}
+  .sheet{width:1440px;margin:0 auto;background:#fff;padding:44px 52px 40px;}
+  h1{margin:0;font-size:34px;letter-spacing:.5px;color:var(--navy);}
+  .sub{margin-top:8px;color:var(--muted);font-size:15px;}
+  .rule{height:1px;background:var(--line);margin:22px 0 26px;}
+
+  .pipeline{display:flex;align-items:stretch;gap:10px;}
+  .step{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 14px 12px;background:#fff;}
+  .step .n{font-size:12px;color:#fff;background:var(--navy);border-radius:10px;
+           padding:1px 8px;display:inline-block;letter-spacing:.5px;}
+  .step h3{margin:8px 0 6px;font-size:16px;}
+  .step p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.55;min-height:38px;}
+  .step code{font-size:11.5px;color:var(--navy);background:var(--tint);
+             padding:1px 5px;border-radius:3px;}
+  .arrow{display:flex;align-items:center;color:#a9b4c4;font-size:20px;}
+
+  .row{display:flex;gap:16px;margin-top:26px;}
+  .card{flex:1;border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:#fff;}
+  .card h4{margin:0 0 10px;font-size:13px;letter-spacing:.6px;color:var(--navy);}
+  .chip{display:inline-block;font-size:12px;padding:3px 9px;border-radius:12px;
+        background:var(--tint);border:1px solid var(--line);margin:0 6px 6px 0;}
+  .ok{color:var(--ok);} .warn{color:var(--warn);} .bad{color:var(--bad);}
+
+  .stats{display:flex;gap:14px;margin-top:26px;}
+  .stat{flex:1;border:1px solid var(--line);border-radius:8px;padding:16px 18px;background:var(--tint);}
+  .stat .v{font-size:30px;font-weight:700;color:var(--navy);line-height:1.1;}
+  .stat .l{margin-top:6px;font-size:12.5px;color:var(--muted);}
+
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px;}
+  th,td{border-bottom:1px solid var(--line);padding:8px 8px;text-align:left;vertical-align:top;}
+  th{background:var(--tint);color:var(--navy);font-size:12px;letter-spacing:.4px;}
+  td.num{font-variant-numeric:tabular-nums;font-weight:700;color:var(--navy);}
+  .hl{background:#fff8e6;}
+
+  pre{margin:10px 0 0;background:#0f1b2d;color:#dfe8f5;border-radius:8px;
+      padding:14px 16px;font-size:12.5px;line-height:1.7;overflow:hidden;}
+  pre .c{color:#7f97b5;}
+  .foot{margin-top:26px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <h1>Job Copilot · 求职自动化工作流</h1>
+  <div class="sub">岗位表 + 简历 → 逐岗位打分 → 投递排名 Excel → 一页定制简历　｜　全部脚本可复跑，不依赖外部服务</div>
+  <div class="rule"></div>
+
+  <div class="pipeline">
+    <div class="step"><span class="n">①</span><h3>文本化</h3>
+      <p>公开页 / 截图 OCR / PDF·Word / 粘贴</p><code>fetch_page.js · ocr_image.py</code></div>
+    <div class="arrow">›</div>
+    <div class="step"><span class="n">②</span><h3>要求抽取</h3>
+      <p>关键词 · 学历 · 城市 · 截止 · 质量闸门</p><code>extract_jd.py → jd.json</code></div>
+    <div class="arrow">›</div>
+    <div class="step"><span class="n">③</span><h3>证据匹配</h3>
+      <p>强命中 / 弱证据 / 缺口 + 百分制</p><code>match_evidence.py</code></div>
+    <div class="arrow">›</div>
+    <div class="step"><span class="n">④</span><h3>简历生成</h3>
+      <p>按命中权重重排 bullet</p><code>build_resume.py</code></div>
+    <div class="arrow">›</div>
+    <div class="step"><span class="n">⑤</span><h3>版式闸门</h3>
+      <p>页高 ≤ 268mm，超页自动裁剪</p><code>check_layout.py</code></div>
+    <div class="arrow">›</div>
+    <div class="step"><span class="n">⑥</span><h3>投递台账</h3>
+      <p>公司 / 分数 / 版本 / 状态</p><code>ledger.py → csv</code></div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <h4>输入源状态</h4>
+      <span class="chip ok">公开官网 ✓</span>
+      <span class="chip ok">Excel 岗位表 ✓</span>
+      <span class="chip ok">截图 OCR ✓</span>
+      <span class="chip ok">简历 docx/pdf ✓</span>
+      <span class="chip warn">中信 · 详情需登录</span>
+      <span class="chip warn">hotjob · iframe + 登录</span>
+      <span class="chip bad">BOSS / 猎聘 · 不抓取</span>
+    </div>
+    <div class="card">
+      <h4>质量闸门</h4>
+      <span class="chip">JD：ok / thin / needs_paste</span>
+      <span class="chip">抓不全 → 不生成简历</span>
+      <span class="chip">深度抓取需含「职责/要求/任职」</span>
+      <span class="chip">导航页 / 登录页自动丢弃</span>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="v">1,680</div><div class="l">岗位表原始条数</div></div>
+    <div class="stat"><div class="v">200</div><div class="l">进入排名（硬过滤后）</div></div>
+    <div class="stat"><div class="v">1,277</div><div class="l">已排除（过期/硕士/非目标域）</div></div>
+    <div class="stat"><div class="v">88</div><div class="l">当前最高匹配分</div></div>
+    <div class="stat"><div class="v">264.9<span style="font-size:14px">mm</span></div><div class="l">定制简历页高（单页通过）</div></div>
+  </div>
+
+  <div class="card" style="margin-top:26px;">
+    <h4>实测：建议投递前 8</h4>
+    <table>
+      <tr><th>#</th><th>分</th><th>公司</th><th>岗位（节选）</th><th>城市</th><th>截止</th></tr>
+      <tr class="hl"><td>1</td><td class="num">88</td><td>华龙证券</td><td>管培生、风险控制、估值核算、财富管理</td><td>北京/上海/深圳</td><td>10-30</td></tr>
+      <tr><td>2</td><td class="num">79</td><td>一汽资本控股</td><td>信贷评审、风控技术、保险业务、资产保全</td><td>长春/济南/广州</td><td>尽快</td></tr>
+      <tr><td>3</td><td class="num">77</td><td>成都农商银行</td><td>总行管培生、储备培训生、金融科技岗</td><td>成都</td><td>10-25</td></tr>
+      <tr><td>4</td><td class="num">76</td><td>广州银行</td><td>总行管培生（金融市场、数字化风控）</td><td>广州/南京/韶关</td><td>10-28</td></tr>
+      <tr><td>5</td><td class="num">76</td><td>平安人寿四川</td><td>运营风控、经营分析、财务管理</td><td>四川</td><td>尽快</td></tr>
+      <tr><td>6</td><td class="num">73</td><td>重庆农商银行</td><td>总行管培生、金融科技人才</td><td>重庆</td><td>11-06</td></tr>
+      <tr><td>7</td><td class="num">69</td><td>汕头邮政</td><td>管培生、财富管理顾问、风控合规</td><td>汕头</td><td>10-31</td></tr>
+      <tr><td>8</td><td class="num">69</td><td>临安农商银行</td><td>管理岗、通用岗</td><td>杭州</td><td>10-31</td></tr>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <h4>打分规则（决定排名可信度）</h4>
+      <span class="chip">硬过滤：本科 / 2026 届 / 未过期</span>
+      <span class="chip">分档：金融业 A，非金融财务岗 B（−15）</span>
+      <span class="chip">词权重：债券·审计·估值 3，数据·分析 0.5–0.8</span>
+      <span class="chip">核心词缺口：精算/核保/理赔 −12/项</span>
+      <span class="chip">覆盖度折扣：权重 &lt; 8 打折</span>
+      <span class="chip">技术岗排除 · 混合岗位封顶 55</span>
+    </div>
+    <div class="card">
+      <h4>已修的三个致命 bug</h4>
+      <span class="chip">深抓复用上一岗位 JD</span>
+      <span class="chip">重算覆盖惩罚分</span>
+      <span class="chip">"数据"二字放行技术岗</span>
+      <span class="chip ok">自检 selftest_matcher 10/10</span>
+    </div>
+  </div>
+
+  <pre><span class="c"># 一条命令跑完：解析简历 → 打分排名 → 抓 JD → 出简历</span>
+python3 scripts/parse_resume.py --input resume.docx --out data/resume_profile.json
+python3 scripts/batch_score.py --excel data/jobs.xlsx --resume data/resume_profile.json \
+        --out output/岗位匹配排名.xlsx --deep 6 --resumes 5</pre>
+
+  <div class="foot">
+    <span>安装位置：~/.codex/skills/job-copilot　｜　工作区：job-copilot/</span>
+    <span>数据口径：1,680 条岗位表 · 2026 届可投 · 2026-10-23 运行</span>
+  </div>
+</div>
+</body>
+</html>

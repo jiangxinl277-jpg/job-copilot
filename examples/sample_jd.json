@@ -1,0 +1,31 @@
+{
+ "company": "某商业银行",
+ "role": "管理培训生（金融市场方向）",
+ "url": "https://example.com/jobs/graduate-trainee",
+ "chars": 0,
+ "quality": "manual",
+ "signal_terms": 2,
+ "education": [
+  "本科"
+ ],
+ "cities": [
+  "上海",
+  "深圳"
+ ],
+ "deadline": "",
+ "keywords": {
+  "管培": 3,
+  "预算": 2,
+  "预测": 2,
+  "分析": 4,
+  "数据": 3,
+  "风险": 2,
+  "风控": 2,
+  "客户": 2,
+  "估值": 1,
+  "债券": 1
+ },
+ "intent_line": "求职意向：管理培训生（金融市场方向）",
+ "source_text": "示例：本科及以上；轮岗方向含金融市场、公司与零售业务；要求具备财务分析、数据分析、风险管理能力。",
+ "extracted_at": "2026-10-23T00:00:00"
+}

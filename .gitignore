@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# personal / runtime artifacts
+output/
+data/raw/
+data/jobs.xlsx
+data/applications.csv
+data/resume_profile.json
+data/jd_*.json
+*.pdf
+
+# keep demo artifacts
+!examples/
