@@ -2,6 +2,8 @@
 
 Turn a job board export and a resume into a ranked application list and one-page tailored resumes — locally, with a quality gate at every step.
 
+**Live preview:** https://jiangxinl277-jpg.github.io/job-copilot/
+
 ![workflow preview](preview/workflow_preview.png)
 
 > 把"一张岗位表 + 一份简历"变成"投哪些、按什么顺序投、投哪一版"。
