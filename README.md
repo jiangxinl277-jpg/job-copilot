@@ -62,16 +62,19 @@ python3 scripts/batch_score.py --excel data/jobs.xlsx --resume data/resume_profi
 
 | Rule | Effect |
 | --- | --- |
-| Hard filters | 学历含本科 / 届次含 2026 / 截止未过 |
-| Tiers | 金融业·银行 = A；非金融但有财务职能 = B (−15)；其余排除 |
-| Keyword weights | 债券·审计·估值 = 3；数据·分析·团队 = 0.5–0.8 |
-| Core-word gap | 岗位要求精算/核保/理赔而简历没有 → −12 each |
-| Coverage confidence | 可匹配权重 < 8 时按比例打折，杜绝"一个词命中就 100" |
-| Tech exclusion | 工程师/开发/算法岗排除；混合岗位封顶 55 |
+| Cohort | 从简历教育经历推算；9–12 月毕业归下一年届，明确写出的“20xx 届”优先 |
+| Hard filters | 只检查候选人届次、候选人学历、截止日期 |
+| Major | 只提示相关度，不设门槛，也不改分 |
+| Role families | 技术、金融、工程、医疗、教育等岗位统一进入打分，不按行业或技术标签排除 |
+| Keyword weights | 基础权重 × 简历中的能力证据强度；泛词固定低权重 |
+| Coverage confidence | 可匹配权重 < 10 时按比例打折，杜绝"一个词命中就 100" |
+| Specialist mismatch | 简历完全没有该方向证据时封顶 35，保留岗位供人工判断 |
+| Table-only cap | 未抓取并核实完整 JD 的岗位表行最高 95 分 |
 
-Self-check after editing the keyword table:
+Self-check after editing the keyword table or scoring logic:
 
 ```bash
+python3 scripts/selftest_batch.py       # 16 assertions
 python3 scripts/selftest_matcher.py     # 10 assertions, must be 10/10
 ```
 

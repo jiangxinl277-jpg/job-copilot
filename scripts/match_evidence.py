@@ -19,6 +19,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # JD 关键词 -> 能力标签（与 profile.json 的 tags 对齐）
 KW2TAG = {
+    # 行业与通用财务
+    "金融": ["finance"], "银行": ["finance"], "保险": ["finance", "risk"],
+    "资管": ["asset_mgmt", "finance"], "财务": ["finance", "fp_and_a"],
+    "会计": ["accounting"], "证券": ["securities"], "基金": ["asset_mgmt"],
+    "投资": ["investment"],
     # 关账 / 审计 / 内控
     "关账": ["close"], "结账": ["close"], "月结": ["close"], "对账": ["close", "audit"],
     "勾稽": ["audit", "close"], "底稿": ["audit"], "审计": ["audit"], "鉴证": ["audit"],
@@ -53,15 +58,33 @@ KW2TAG = {
     # 客户 / 数据 / AI / 流程
     "客户": ["client"], "营销": ["client"], "财富": ["client"], "渠道": ["client"],
     "数据": ["data"], "数据分析": ["data", "analysis"], "SQL": ["data"], "清洗": ["data"],
+    "Excel": ["data", "reporting"], "XLOOKUP": ["data"], "SUMIFS": ["data"],
+    "数据透视表": ["data"], "Power Query": ["data", "process"], "Power BI": ["data"],
+    "Tableau": ["data"], "Python": ["programming", "data"], "Java": ["programming"],
+    "C++": ["programming"], "JavaScript": ["programming"], "前端": ["programming"],
+    "后端": ["programming"], "全栈": ["programming"], "开发": ["programming"],
+    "软件": ["programming"], "算法": ["algorithm"], "机器学习": ["ml", "algorithm"],
+    "深度学习": ["ml"], "测试": ["qa"], "运维": ["devops"], "嵌入式": ["embedded", "programming"],
     "AI": ["ai"], "人工智能": ["ai"], "大模型": ["ai"], "智能体": ["ai"],
     "自动化": ["process", "ai"], "流程": ["process"], "优化": ["process"],
     "沟通": ["communication"], "汇报": ["communication"], "跨部门": ["communication"],
     "领导": ["leadership"], "统筹": ["leadership"], "团队": ["leadership"],
+    # 其他专业的核心岗位词（用于评估迁移度，不用于排除岗位）
+    "机械": ["engineering_mech"], "电气": ["engineering_elec"], "工艺": ["engineering_process"],
+    "化工": ["chemical"], "材料": ["materials"], "土木": ["civil"],
+    "医师": ["medical"], "护理": ["nursing"], "药学": ["pharmacy"],
+    "教师": ["education"], "教研": ["education"], "法务": ["legal"], "律师": ["legal"],
+    "招聘": ["hr"], "人力资源": ["hr"], "供应链": ["supply_chain"], "物流": ["supply_chain"],
     "英语": [],
 }
 
 # 同义词：用于在经历文本里做"真命中"检索
 ALIASES = {
+    "金融": ["金融", "Financial", "财务", "估值", "债券"],
+    "银行": ["银行"], "保险": ["保险"], "资管": ["资管", "资产管理"],
+    "财务": ["财务", "财务分析", "管理报表", "预算"],
+    "会计": ["会计", "账务", "明细账"],
+    "证券": ["证券", "股票", "美股"], "基金": ["基金"], "投资": ["投资", "估值"],
     "关账": ["关账", "结账", "月结"], "结账": ["结账", "关账"], "月结": ["月结", "关账"],
     "勾稽": ["勾稽", "跨表", "核对"], "底稿": ["底稿"], "审计": ["审计"],
     "尽调": ["尽调", "尽调", "尽职调查"], "尽职调查": ["尽职调查", "尽调"],
@@ -79,6 +102,13 @@ ALIASES = {
     "咨询": ["咨询顾问", "咨询项目", "管理咨询", "咨询服务", "咨询方案"],
     "顾问": ["顾问"],
     "客户": ["客户"], "数据": ["数据"], "数据分析": ["数据分析"],
+    "Excel": ["Excel"], "XLOOKUP": ["XLOOKUP"], "SUMIFS": ["SUMIFS"],
+    "数据透视表": ["数据透视表"], "Power Query": ["Power Query"],
+    "Power BI": ["Power BI"], "Tableau": ["Tableau"], "SQL": ["SQL"],
+    "Python": ["Python"], "Java": ["Java"], "C++": ["C++"], "JavaScript": ["JavaScript"],
+    "前端": ["前端"], "后端": ["后端"], "全栈": ["全栈"], "开发": ["开发", "编程", "代码"],
+    "软件": ["软件"], "算法": ["算法"], "机器学习": ["机器学习", "ML"],
+    "深度学习": ["深度学习"], "测试": ["测试"], "运维": ["运维"], "嵌入式": ["嵌入式"],
     "AI": ["ChatGPT", "Gemini", "AI", "MCP"], "智能体": ["智能体", "MCP", "Skills"],
     "自动化": ["自动化", "Power Query", "重构"], "流程": ["流程"],
     "沟通": ["沟通", "汇报"], "团队": ["小组", "团队", "统筹"],

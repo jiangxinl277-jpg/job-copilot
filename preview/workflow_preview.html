@@ -100,8 +100,8 @@
   <div class="stats">
     <div class="stat"><div class="v">1,680</div><div class="l">岗位表原始条数</div></div>
     <div class="stat"><div class="v">200</div><div class="l">进入排名（硬过滤后）</div></div>
-    <div class="stat"><div class="v">1,277</div><div class="l">已排除（过期/硕士/非目标域）</div></div>
-    <div class="stat"><div class="v">88</div><div class="l">当前最高匹配分</div></div>
+    <div class="stat"><div class="v">742</div><div class="l">已排除（届别/学历/过期/无词）</div></div>
+    <div class="stat"><div class="v">95</div><div class="l">当前最高匹配分</div></div>
     <div class="stat"><div class="v">264.9<span style="font-size:14px">mm</span></div><div class="l">定制简历页高（单页通过）</div></div>
   </div>
 
@@ -109,33 +109,36 @@
     <h4>实测：建议投递前 8</h4>
     <table>
       <tr><th>#</th><th>分</th><th>公司</th><th>岗位（节选）</th><th>城市</th><th>截止</th></tr>
-      <tr class="hl"><td>1</td><td class="num">88</td><td>华龙证券</td><td>管培生、风险控制、估值核算、财富管理</td><td>北京/上海/深圳</td><td>10-30</td></tr>
-      <tr><td>2</td><td class="num">79</td><td>一汽资本控股</td><td>信贷评审、风控技术、保险业务、资产保全</td><td>长春/济南/广州</td><td>尽快</td></tr>
-      <tr><td>3</td><td class="num">77</td><td>成都农商银行</td><td>总行管培生、储备培训生、金融科技岗</td><td>成都</td><td>10-25</td></tr>
-      <tr><td>4</td><td class="num">76</td><td>广州银行</td><td>总行管培生（金融市场、数字化风控）</td><td>广州/南京/韶关</td><td>10-28</td></tr>
-      <tr><td>5</td><td class="num">76</td><td>平安人寿四川</td><td>运营风控、经营分析、财务管理</td><td>四川</td><td>尽快</td></tr>
-      <tr><td>6</td><td class="num">73</td><td>重庆农商银行</td><td>总行管培生、金融科技人才</td><td>重庆</td><td>11-06</td></tr>
-      <tr><td>7</td><td class="num">69</td><td>汕头邮政</td><td>管培生、财富管理顾问、风控合规</td><td>汕头</td><td>10-31</td></tr>
-      <tr><td>8</td><td class="num">69</td><td>临安农商银行</td><td>管理岗、通用岗</td><td>杭州</td><td>10-31</td></tr>
+      <tr class="hl"><td>1</td><td class="num">95</td><td>中兴财经</td><td>财务经理、财务数字化经理</td><td>北京/南京/深圳</td><td>04-10</td></tr>
+      <tr><td>2</td><td class="num">95</td><td>海西金租</td><td>项目经理、授信审查、财务管理</td><td>泉州/厦门/福州</td><td>尽快</td></tr>
+      <tr><td>3</td><td class="num">93</td><td>锐识咨询</td><td>投行、私募股权、信贷研究</td><td>北京</td><td>尽快</td></tr>
+      <tr><td>4</td><td class="num">92</td><td>仲信国际融资租赁</td><td>金融营销管培生、征信专员</td><td>上海/东莞/南京</td><td>尽快</td></tr>
+      <tr><td>5</td><td class="num">90</td><td>华龙证券</td><td>管培生、风险控制、估值核算</td><td>北京/上海/深圳</td><td>10-30</td></tr>
+      <tr><td>6</td><td class="num">86</td><td>福特中国</td><td>财务毕业培训生等多岗位</td><td>上海/南京</td><td>10-31</td></tr>
+      <tr><td>7</td><td class="num">85</td><td>工银投资</td><td>投募资、风控</td><td>南京/北京</td><td>尽快</td></tr>
+      <tr><td>8</td><td class="num">84</td><td>江西裕民银行</td><td>管理培训生</td><td>南昌</td><td>10-24</td></tr>
     </table>
   </div>
 
   <div class="row">
     <div class="card">
       <h4>打分规则（决定排名可信度）</h4>
-      <span class="chip">硬过滤：本科 / 2026 届 / 未过期</span>
-      <span class="chip">分档：金融业 A，非金融财务岗 B（−15）</span>
-      <span class="chip">词权重：债券·审计·估值 3，数据·分析 0.5–0.8</span>
-      <span class="chip">核心词缺口：精算/核保/理赔 −12/项</span>
-      <span class="chip">覆盖度折扣：权重 &lt; 8 打折</span>
-      <span class="chip">技术岗排除 · 混合岗位封顶 55</span>
+      <span class="chip">届别：从教育经历毕业时间推算</span>
+      <span class="chip">硬过滤：本人届别 / 本人学历 / 未过期</span>
+      <span class="chip">专业：仅提示相关度，不改分</span>
+      <span class="chip">技术岗不预筛：统一按证据打分</span>
+      <span class="chip">词权重：基础权重 × 简历证据强度</span>
+      <span class="chip">泛词降权 · 覆盖不足按比例打折</span>
+      <span class="chip">方向无证据封顶 35，不删除</span>
+      <span class="chip">仅岗位表最高 95，核实 JD 后才可更高</span>
     </div>
     <div class="card">
-      <h4>已修的三个致命 bug</h4>
-      <span class="chip">深抓复用上一岗位 JD</span>
-      <span class="chip">重算覆盖惩罚分</span>
-      <span class="chip">"数据"二字放行技术岗</span>
-      <span class="chip ok">自检 selftest_matcher 10/10</span>
+      <h4>本轮修正</h4>
+      <span class="chip">届次不再写死 2026</span>
+      <span class="chip">专业不再作为硬门槛</span>
+      <span class="chip">技术岗不再提前删除</span>
+      <span class="chip">动态权重防止“一个泛词 100 分”</span>
+      <span class="chip ok">自检 16/16 + 10/10</span>
     </div>
   </div>
 
@@ -146,7 +149,7 @@ python3 scripts/batch_score.py --excel data/jobs.xlsx --resume data/resume_profi
 
   <div class="foot">
     <span>安装位置：~/.codex/skills/job-copilot　｜　工作区：job-copilot/</span>
-    <span>数据口径：1,680 条岗位表 · 2026 届可投 · 2026-10-23 运行</span>
+    <span>数据口径：1,680 条岗位表 · 届别从候选人简历读取 · 2026-10-23 运行</span>
   </div>
 </div>
 </body>
